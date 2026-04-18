@@ -4,10 +4,12 @@ Maneja rutas y operaciones básicas (suma, resta, etc.).
 """
 
 # app/app.py
+import os
 from flask import Flask, render_template, request
-from .calculadora import sumar, restar, multiplicar, dividir
+from .calculadora import sumar, restar, multiplicar, dividir, potencia, modulo
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-only-insecure-key")
 
 
 @app.route("/", methods=["GET"])
@@ -34,6 +36,10 @@ def calcular():
                 resultado = multiplicar(num1, num2)
             elif operacion == "dividir":
                 resultado = dividir(num1, num2)
+            elif operacion == "potencia":
+                resultado = potencia(num1, num2)
+            elif operacion == "modulo":
+                resultado = modulo(num1, num2)
             else:
                 resultado = "Operación no válida"
         except ValueError:
@@ -44,5 +50,12 @@ def calcular():
     return render_template("index.html", resultado=resultado)
 
 
+@app.route("/health")
+def health():
+    """Health check endpoint para el ALB."""
+    return "OK", 200
+
+
 if __name__ == "__main__":  # pragma: no cover
-    app.run(debug=True, port=5000, host="0.0.0.0")
+    app_port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, port=app_port, host="0.0.0.0")
