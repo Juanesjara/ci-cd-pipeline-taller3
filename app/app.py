@@ -50,7 +50,7 @@ def calcular():
     return render_template("index.html", resultado=resultado)
 
 
-@app.route("/health" methods=["GET"])
+@app.route("/health", methods=["GET"])
 def health():
     """Health check endpoint para el ALB."""
     return "OK", 200
