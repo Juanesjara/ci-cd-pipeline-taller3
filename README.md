@@ -64,7 +64,7 @@ Otra enseñanza importante fue la distinción entre secretos y variables en GitH
 
 Finalmente, entender el orden de las capas en el Dockerfile fue valioso: copiar primero requirements.txt e instalar dependencias antes de copiar el resto del código permite que Docker reutilice esa capa de caché en builds posteriores cuando las dependencias no cambiaron, acelerando considerablemente las construcciones.
 
-Pero como tal una de las principales dificulatades que tuvimos es que alprincipio cada vez que corregiamos un error de sonar y le haciamos push nos fallaba el black -check por no correr el black desde antes en el codigo antes de subirlo asi que apartir de eso siempre corriamos el black antes de hacer push
+Pero como tal una de las principales dificulatades que tuvimos es que alprincipio cada vez que corregiamos un error de sonar y le haciamos push nos fallaba el black -check por no correr el black desde antes en el codigo antes de subirlo asi que apartir de eso siempre corriamos el black antes de hacer push.
 
 ---
 
